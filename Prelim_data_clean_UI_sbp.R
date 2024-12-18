@@ -1,0 +1,209 @@
+
+library(tidyverse)
+library(readxl)
+dfSBP <- read_excel("dfSBP.xlsx")
+
+# Convert variables to appropriate classes
+dfSBP$PAT_MRN_ID <- as.factor(dfSBP$PAT_MRN_ID)
+dfSBP$BIRTH_DATE <- as.Date(dfSBP$BIRTH_DATE)
+dfSBP$DEATH_DATE <- as.Date(dfSBP$DEATH_DATE)
+dfSBP$DEATH <- as.Date(dfSBP$DEATH_DATE)
+dfSBP$Race <- as.factor(dfSBP$Race)
+dfSBP$Gender <- as.factor(dfSBP$Gender)
+dfSBP$BMI <- as.numeric(dfSBP$BMI)
+dfSBP$PROC_BGN_TIME <- as.POSIXct(dfSBP$PROC_BGN_TIME)
+dfSBP$PROC_END_TIME <- as.POSIXct(dfSBP$PROC_END_TIME)
+dfSBP$HOSP_ADMSN_TIME <- as.POSIXct(dfSBP$HOSP_ADMSN_TIME)
+dfSBP$HOSP_DISCHRG_TIME <- as.POSIXct(dfSBP$HOSP_DISCHRG_TIME)
+dfSBP$PatientClass <- as.factor(dfSBP$PatientClass)
+dfSBP$ORDER_PROC_ID <- as.factor(dfSBP$ORDER_PROC_ID)
+# HR_Before and HR_After converted to numeric, handling NA values
+dfSBP$HR_Before <- as.numeric(dfSBP$HR_Before)
+dfSBP$HR_After <- as.numeric(dfSBP$HR_After)
+# BP_Before and BP_After remain as character
+dfSBP$SodiumDayOf <- as.numeric(dfSBP$SodiumDayOf)
+dfSBP$SodiumAfter <- as.numeric(dfSBP$SodiumAfter)
+dfSBP$AlbuminDayOf <- as.numeric(dfSBP$AlbuminDayOf)
+dfSBP$AlbuminAfter <- as.numeric(dfSBP$AlbuminAfter)
+dfSBP$CreatinineDayOf <- as.numeric(dfSBP$CreatinineDayOf)
+dfSBP$CreatinineAfter <- as.numeric(dfSBP$CreatinineAfter)
+dfSBP$CreatinineDate <- as.POSIXct(dfSBP$CreatinineDate)
+dfSBP$BilirubinDayOf <- as.numeric(dfSBP$BilirubinDayOf)
+dfSBP$BilirubinAfter <- as.numeric(dfSBP$BilirubinAfter)
+dfSBP$INRDayOf <- as.numeric(dfSBP$INRDayOf)
+dfSBP$INRAfter <- as.numeric(dfSBP$INRAfter)
+dfSBP$AlbuminOtherDayOf <- as.numeric(dfSBP$AlbuminOtherDayOf)
+dfSBP$AlbuminOtherAfter <- as.numeric(dfSBP$AlbuminOtherAfter)
+dfSBP$NeutrophilsDayOf <- as.integer(dfSBP$NeutrophilsDayOf)
+dfSBP$NeutrophilsAfter <- as.integer(dfSBP$NeutrophilsAfter)
+dfSBP$Readmit1 <- as.POSIXct(dfSBP$Readmit1)
+dfSBP$PrimaryDX1Week <- as.factor(dfSBP$PrimaryDX1Week)
+dfSBP$SecondDX1Week <- as.factor(dfSBP$SecondDX1Week)
+dfSBP$Readmit2 <- as.POSIXct(dfSBP$Readmit2)
+dfSBP$PrimaryDX2Week <- as.factor(dfSBP$PrimaryDX2Week)
+dfSBP$SecondDX2Week <- as.factor(dfSBP$SecondDX2Week)
+dfSBP$Readmit4 <- as.POSIXct(dfSBP$Readmit4)
+dfSBP$PrimaryDX4Week <- as.factor(dfSBP$PrimaryDX4Week)
+dfSBP$SecondDX4Week <- as.factor(dfSBP$SecondDX4Week)
+dfSBP$Readmit12 <- as.POSIXct(dfSBP$Readmit12)
+dfSBP$PrimaryDX12Week <- as.factor(dfSBP$PrimaryDX12Week)
+dfSBP$SecondDX12Week <- as.factor(dfSBP$SecondDX12Week)
+dfSBP$ProblemList1 <- as.factor(dfSBP$ProblemList1)
+dfSBP$ProblemList2 <- as.factor(dfSBP$ProblemList2)
+dfSBP$ProblemList3 <- as.factor(dfSBP$ProblemList3)
+dfSBP$ProblemList4 <- as.factor(dfSBP$ProblemList4)
+dfSBP$ProblemList5 <- as.factor(dfSBP$ProblemList5)
+dfSBP$ProblemList6 <- as.factor(dfSBP$ProblemList6)
+dfSBP$ProblemList7 <- as.factor(dfSBP$ProblemList7)
+dfSBP$ProblemList8 <- as.factor(dfSBP$ProblemList8)
+dfSBP$ProblemList9 <- as.factor(dfSBP$ProblemList9)
+dfSBP$ProblemList10 <- as.factor(dfSBP$ProblemList10)
+dfSBP$Med1 <- as.factor(dfSBP$Med1)
+dfSBP$Med2 <- as.factor(dfSBP$Med2)
+dfSBP$Med3 <- as.factor(dfSBP$Med3)
+dfSBP$Med4 <- as.factor(dfSBP$Med4)
+dfSBP$Med5 <- as.factor(dfSBP$Med5)
+dfSBP$Med6 <- as.factor(dfSBP$Med6)
+dfSBP$Med7 <- as.factor(dfSBP$Med7)
+dfSBP$Med8 <- as.factor(dfSBP$Med8)
+dfSBP$Med9 <- as.factor(dfSBP$Med9)
+dfSBP$Med10 <- as.factor(dfSBP$Med10)
+dfSBP$Med11 <- as.factor(dfSBP$Med11)
+dfSBP$Med12 <- as.factor(dfSBP$Med12)
+dfSBP$Med13 <- as.factor(dfSBP$Med13)
+dfSBP$Med14 <- as.factor(dfSBP$Med14)
+dfSBP$ResultValue1 <- as.factor(dfSBP$ResultValue1)
+dfSBP$ResultValue2 <- as.factor(dfSBP$ResultValue2)
+dfSBP$ResultValue3 <- as.factor(dfSBP$ResultValue3)
+dfSBP$ResultValue4 <- as.factor(dfSBP$ResultValue4)
+dfSBP$ResultValue5 <- as.factor(dfSBP$ResultValue5)
+dfSBP$ResultValue6 <- as.factor(dfSBP$ResultValue6)
+dfSBP$SBP <- as.factor(dfSBP$SBP)
+dfSBP$Date_SBP <- as.Date(dfSBP$Date_SBP)
+dfSBP$PROC_BGN_DATE <- as.Date(dfSBP$PROC_BGN_TIME)
+dfSBP$PROC_END_DATE <- as.Date(dfSBP$PROC_END_TIME)
+dfSBP$HOSP_ADMSN_DATE <- as.Date(dfSBP$HOSP_ADMSN_TIME)
+dfSBP$HOSP_DISCHRG_DATE <- as.Date(dfSBP$HOSP_DISCHRG_TIME)
+dfSBP$Death <- ifelse(!is.na(dfSBP$DEATH_DATE), 1, 0)
+
+## defining SBP
+dfSBP$NeutrophilsDayOf <- as.integer(dfSBP$NeutrophilsDayOf)
+dfSBP$neut250up <- ifelse(dfSBP$NeutrophilsDayOf >= 250, 1, 0)
+dfSBP$SBP10 <- ifelse(!is.na(dfSBP$SBP), 1, 0)
+plot(dfSBP$NeutrophilsDayOf, ylim = c(0, 1000))
+hist(dfSBP$neut250up)
+dfSBP <- dfSBP %>%
+  group_by(PAT_MRN_ID) %>%
+  mutate(SBPDX = ifelse(any(SBP10 == 1 | neut250up == 1), 1, 0)) %>%
+  ungroup()
+dfSBP <- dfSBP %>% mutate(SBPDX = ifelse(is.na(SBPDX), 0, SBPDX))
+dfselect <- dfSBP %>% select(SBPDX, SBP, neut250up ,PAT_MRN_ID) #look at the sbpdx
+
+# select outpatient only
+#dfSBP <- dfSBP %>% filter(PatientClass == "Hospital Outpatient Surgery" | PatientClass == "Outpatient" | PatientClass == "Observation" | PatientClass =="Same Day Admit")
+
+
+# Create the NeutrophilCategory variable
+dfSBP$NeuCat <- cut(dfSBP$NeutrophilsDayOf,
+                    breaks = c(-Inf, 62.5, 125, Inf),
+                    labels = c(0, 1, 2),
+                    right = FALSE)
+
+glimpse(dfSBP)
+
+dfSBP$NeutrophilsDayOf_log <- log(dfSBP$NeutrophilsDayOf + 1)  # Adding 1 to handle log(0)
+
+
+# Define the fallback date
+dfSBP <- dfSBP %>%
+  group_by(PAT_MRN_ID) %>%
+  mutate(oldest_PROC_BGN_DATE = min(PROC_BGN_DATE, na.rm = TRUE),
+         fallback_date = oldest_PROC_BGN_DATE + 90) %>%
+  ungroup()
+# Find the most recent PROC_BGN_DATE for each MRN
+dfSBP <- dfSBP %>%
+  group_by(PAT_MRN_ID) %>%
+  mutate(most_recent_PROC_BGN_DATE = max(PROC_BGN_DATE, na.rm = TRUE)) %>%
+  ungroup()
+# Fill NA values in Date_SBP with the earliest of the fallback date, most recent PROC_BGN_DATE, or DEATH_DATE
+dfSBP$SBP_DATE <- ifelse(is.na(dfSBP$Date_SBP), 
+                         pmin(dfSBP$fallback_date, dfSBP$most_recent_PROC_BGN_DATE, dfSBP$DEATH_DATE, na.rm = TRUE), 
+                         dfSBP$Date_SBP)
+# Convert the output to Date format (since pmin returns numeric)
+dfSBP$SBP_DATE <- as.Date(dfSBP$SBP_DATE, origin = "1970-01-01")
+
+glimpse(dfSBP)
+
+# Select the pt with cirrhosis
+df <- dfSBP %>%
+  filter(!is.na(ProblemList1) | !is.na(ProblemList2) | !is.na(ProblemList3) |
+           !is.na(ProblemList4) | !is.na(ProblemList5) | !is.na(ProblemList6) |
+           !is.na(ProblemList7) | !is.na(ProblemList8) | !is.na(ProblemList9) |
+           !is.na(ProblemList10))
+
+
+# Select the earliest observation for each MRN
+df <- df %>%
+  group_by(PAT_MRN_ID) %>%               # Group by the MRN (PAT_MRN_ID)
+  slice_min(order_by = PROC_BGN_DATE) %>% # Select the row with the earliest PROC_BGN_DATE
+  ungroup()                               # Ungroup the data
+
+df.non.sbp <- df %>% filter(NeutrophilsDayOf<250) # removeing thsoe with sbp at initial para
+
+df.sbp <- df %>% filter(NeutrophilsDayOf>=250 & NeutrophilsDayOf < 9999)
+hist(df.sbp$NeutrophilsDayOf_log)
+glimpse(df.non.sbp)
+
+
+
+
+
+### KM ###
+
+
+# Step 1: Convert dates to Date class if they aren't already
+df.non.sbp$PROC_BGN_DATE <- as.Date(df.non.sbp$PROC_BGN_DATE)
+df.non.sbp$DATE_SBP <- as.Date(df.non.sbp$SBP_DATE)
+
+# Step 2: Remove rows where Date_SBP is earlier than PROC_BGN_DATE
+df.non.sbp <- df.non.sbp %>%
+  filter(DATE_SBP >= PROC_BGN_DATE)
+
+# Step 3: Calculate the time difference in days between PROC_BGN_DATE and DATE_SBP
+df.non.sbp$time_diff <- as.numeric(difftime(df.non.sbp$DATE_SBP, df.non.sbp$PROC_BGN_DATE, units = "days"))
+
+# Step 4: Censor those with time_diff greater than 180 days
+df.non.sbp$time_diff_censored <- pmin(df.non.sbp$time_diff, 90)  # Cap at 180 days
+df.non.sbp$censor_flag <- ifelse(df.non.sbp$time_diff > 90, 0, df.non.sbp$SBPDX)  # Censor those beyond 90 days
+
+#define Death 4 anal
+df.non.sbp$Death_original <- df.non.sbp$Death
+df.non.sbp$time_diff_death <- as.numeric(difftime(df.non.sbp$DEATH_DATE, df.non.sbp$PROC_BGN_DATE, units = "days"))
+df.non.sbp$Death <- ifelse(df.non.sbp$time_diff_death > 90 | df.non.sbp$time_diff_death <1, 0, df.non.sbp$Death_original)
+df.non.sbp$Death[is.na(df.non.sbp$Death)] <- 0
+
+# Step 5: Create a survival object
+surv_object <- Surv(time = df.non.sbp$time_diff_censored, event = df.non.sbp$censor_flag)
+
+# Step 6: Fit the Kaplan-Meier survival curve
+fit <- survfit(surv_object ~ df.non.sbp$NeuCat)
+
+# Step 7: Plot the Kaplan-Meier curve
+ggsurvplot(fit,
+           data = df.non.sbp,
+           pval = TRUE,                   # Add p-value for log-rank test
+           conf.int = TRUE,               # Enable confidence interval
+           risk.table = TRUE,             # Enable risk table
+           xlim = c(0, 90),              # Restrict x-axis to 90 days
+           xlab = "Time (days)",          # Label for x-axis
+           ylab = "Cumulative Incidence", # Label for y-axis
+           fun = "event")                 # Show cumulative event curve
+
+
+
+
+# count outcomes per Michi email
+sum(df.non.sbp$Death_original == 1) #all death
+sum(df.non.sbp$Death == 1) # death before sbp or censoring/90d
+sum(df.non.sbp$SBPDX) #count sbp
+
